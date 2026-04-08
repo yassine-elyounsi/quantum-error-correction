@@ -131,6 +131,7 @@ rewards = []
 for _ in range(5000):
     obs, _ = eval_env.reset()
     action, _ = model.predict(obs, deterministic=True)
+    action=int(action)
     _, reward, _, _, _ = eval_env.step(action)
 
     rewards.append(reward)
