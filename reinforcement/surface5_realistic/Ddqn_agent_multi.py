@@ -290,15 +290,26 @@ class MultiDiscreteDDQNAgent:
     #  SAVE / LOAD
     # ──────────────────────────────────────────────────────────────────────────
 
+    # def save(self, path: str) -> None:
+    #     torch.save({
+    #         "online_net":  self.online_net.state_dict(),
+    #         "target_net":  self.target_net.state_dict(),
+    #         "optimizer":   self.optimizer.state_dict(),
+    #         "epsilon":     self.epsilon,
+    #         "steps_done":  self._steps_done,
+    #     }, path)
+    #     print(f"[MD-DDQN] Saved → {path}")
     def save(self, path: str) -> None:
-        torch.save({
-            "online_net":  self.online_net.state_dict(),
-            "target_net":  self.target_net.state_dict(),
-            "optimizer":   self.optimizer.state_dict(),
-            "epsilon":     self.epsilon,
-            "steps_done":  self._steps_done,
-        }, path)
-        print(f"[MD-DDQN] Saved → {path}")
+     import os
+     tmp = path + ".tmp"
+     torch.save({
+        "online_net":  self.online_net.state_dict(),
+        "target_net":  self.target_net.state_dict(),
+        "optimizer":   self.optimizer.state_dict(),
+        "epsilon":     self.epsilon,
+        "steps_done":  self._steps_done,
+    }, tmp)
+     os.replace(tmp, path)   # atomic rename; avoids partial/locked writes    
 
     def load(self, path: str) -> None:
         ckpt = torch.load(path, map_location=self.device, weights_only=False)

@@ -3,3 +3,17 @@ venv/
 env/
 .venv/ 
 .env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Weights & Biases
+wandb/
+
+# Model checkpoints & files
+*.pt
+*.pkl
+checkpoints_d5_continuous_new/
+checkpoints_d5_ppr_p005/
+checkpoints_d5_ppr_p005_latest/

@@ -80,7 +80,7 @@ DEFAULT_CONFIG = dict(
     identity_bias   = 0.97,        # exploration: P(Identity) per head when exploring
 
     # Training
-    n_episodes      = 60_000,
+    n_episodes      = 70_000,
     warmup_episodes = 50,         # episodes can be long → fewer warmup eps
     train_every     = 1,          # train_step every N env steps
     log_interval    = 50,
@@ -247,7 +247,8 @@ def train(config: dict = None, resume: bool = False):
             obs = next_obs
     agent.epsilon = saved_eps
     # Reset the step counter so warmup doesn't consume the ε schedule
-    agent._steps_done = 0
+    if not resume:
+     agent._steps_done = 0
     print(f"[Warmup] Buffer: {len(agent.buffer):,}\n")
 
     # ── Rolling windows ───────────────────────────────────────────────────────
