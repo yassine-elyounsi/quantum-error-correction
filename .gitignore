@@ -14,6 +14,3 @@ wandb/
 # Model checkpoints & files
 *.pt
 *.pkl
-checkpoints_d5_continuous_new/
-checkpoints_d5_ppr_p005/
-checkpoints_d5_ppr_p005_latest/
